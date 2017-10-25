@@ -16,7 +16,7 @@ export default class WelcomePage extends Component {
         super(props);
     }
 
-    render() {        
+    render() {
         return  (
             <View style={styles.container}>          
                 <Welcome welcomeHeaderText='Welcome to the DLS Calculator'/>          
