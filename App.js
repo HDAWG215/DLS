@@ -15,29 +15,6 @@ fetchState = () => {
     const state = getState();
 }
 
-class Welcome extends Component {
-    render() {
-        return (
-        <Text style={styles.welcome}>{this.props.welcomeHeaderText}</Text>
-        );
-    }
-}
-
-class ScoreBox extends Component {
-  constructor(props) {
-    super(props);  
-  }
-
-  render() {
-    return (
-      <TextInput
-        style={styles.textBox}
-        onChangeText={(text) => this.setState({scoreBoxText: text})}
-        value={this.props.text}/>
-    )
-  }
-}
-
 export default class App extends Component {  
     constructor(props) {
         super(props);
@@ -64,6 +41,10 @@ export default class App extends Component {
         })
     }
 
+    textChange = (text) => {
+        this.setState({text})
+    }
+
     render() {
         return ( 
             <View style={styles.container}>     
@@ -75,6 +56,7 @@ export default class App extends Component {
                 /> : 
                 <CalculationPage 
                     resetPickerValue={ this.resetPickerValue }
+                    textChange={ this.textChange }
                     {...this.state}
                 /> }    
             </View>
