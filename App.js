@@ -12,11 +12,20 @@ import {
   TextInput,
   Modal
 } from 'react-native';
+import StyledButton from './Components/Button';
 import styles from './Components/StyleSheet';
-import WelcomePage from './Components/WelcomePage';
+import ScenarioPicker from './Components/ScenarioPicker';
 
 fetchState = () => {
   const state = getState();
+}
+
+class Welcome extends Component {
+  render() {
+    return (
+      <Text style={styles.welcome}>{this.props.welcomeHeaderText}</Text>
+    );
+  }
 }
 
 class ScoreBox extends Component {
@@ -38,7 +47,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {      
+    };
   };
 
   valueChange = (value) => {
@@ -56,10 +66,15 @@ export default class App extends Component {
 
   render() {
     return (      
-      <WelcomePage
-        setActivePickerState={ this.setActivePickerState }
-        valueChange={ this.valueChange }
-        { ...this.state }/>            
+      <View style={styles.container}>          
+        <Welcome welcomeHeaderText='Welcome to the DLS Calculator'/>          
+        <Text style={styles.instructions}>Please choose a scenario below</Text>            
+        <ScenarioPicker 
+          setActivePickerState={this.setActivePickerState} 
+          valueChange={this.valueChange} 
+          {...this.state}/>      
+        { this.state.pickerValue ? <Text style={styles.textThing}>{this.state.pickerValue}</Text> : null }
+      </View>         
     );
   }
 }
