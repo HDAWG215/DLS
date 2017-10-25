@@ -15,6 +15,7 @@ import {
 import StyledButton from './Components/Button';
 import styles from './Components/StyleSheet';
 import WelcomePage from './Components/WelcomePage';
+import CalculationPage from './Components/CalculationPage';
 
 fetchState = () => {
     const state = getState();
@@ -46,7 +47,6 @@ class ScoreBox extends Component {
 export default class App extends Component {  
     constructor(props) {
         super(props);
-
         this.state = {};
     };
 
@@ -63,13 +63,26 @@ export default class App extends Component {
         })
     }
 
+    resetPickerValue = () => {
+        this.setState(() => {
+            return { pickerValue: null }
+        })
+    }
+
     render() {
-        return (      
-        <WelcomePage 
-            setActivePickerState={ this.setActivePickerState }
-            valueChange={ this.valueChange }
-            pickerValue={ this.state.pickerValue }
-            {...this.state}/>              
+        return ( 
+            <View style={styles.container}>     
+                { !this.state.pickerValue ? <WelcomePage 
+                    setActivePickerState={ this.setActivePickerState }
+                    valueChange={ this.valueChange }
+                    pickerValue={ this.state.pickerValue }
+                    {...this.state}
+                /> : 
+                <CalculationPage 
+                    resetPickerValue={ this.resetPickerValue }
+                    {...this.state}
+                /> }    
+            </View>
         );
     }
 }
