@@ -23,7 +23,10 @@ export default styles = StyleSheet.create({
         height: 40, 
         width: 120, 
         borderColor: 'grey', 
-        borderWidth: 1
+        borderWidth: 1,
+        alignSelf: 'center',
+        margin: 25,
+        padding: 10
     },
     picker: {
          width: 1000
