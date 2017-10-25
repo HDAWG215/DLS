@@ -65,7 +65,8 @@ export default class App extends Component {
 
     resetPickerValue = () => {
         this.setState(() => {
-            return { pickerValue: null }
+            return { pickerValue: null,
+                activePicker: false }
         })
     }
 
