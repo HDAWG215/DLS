@@ -16,16 +16,17 @@ export default class WelcomePage extends Component {
         super(props);
     }
 
-    render() {
+    render() {        
         return  (
             <View style={styles.container}>          
                 <Welcome welcomeHeaderText='Welcome to the DLS Calculator'/>          
                 <Text style={styles.instructions}>Please choose a scenario below</Text>            
                 <ScenarioPicker 
                     setActivePickerState={this.props.setActivePickerState} 
-                    valueChange={this.props.valueChange}/>      
+                    valueChange={this.props.valueChange}
+                    {...this.props}/>      
                 <Text style={styles.textThing}>{this.props.pickerValue}</Text>
-            </View>       
+            </View>
         )
     }
 }
