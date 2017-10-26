@@ -49,7 +49,10 @@ export default class BetweenInnings extends Component {
         const firstTeamTotal = this.state.firstTeamTotal;
         const secondTeamOvers = this.state.secondTeamOvers;
         const secondTeamResources = ResourceTable[secondTeamOvers][0];
-        return Math.round((firstTeamTotal * (secondTeamResources/firstTeamResources)));
+        const revisedTotal = lengthOfGame == secondTeamOvers ? 
+            parseInt(firstTeamTotal) + 1 :
+            parseInt((firstTeamTotal * (secondTeamResources/firstTeamResources))) + 1; 
+        return Math.floor(revisedTotal);
     }
 
     render() {
