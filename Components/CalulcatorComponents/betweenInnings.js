@@ -15,14 +15,12 @@ export default class BetweenInnings extends Component {
     }
 
     gameLength = (text) => {
-        console.log(text);
         this.setState(() => {
             return { lengthOfGame: text }
         })
     }
     
-    firstTeamTotal = (text) => {
-        console.log(text);
+    firstTeamTotal = (text) => {        
         this.setState(() => {
             return { firstTeamTotal: text }
         })
@@ -30,14 +28,12 @@ export default class BetweenInnings extends Component {
     
     
     secondTeamOvers = (text) => {
-        console.log(text);
         this.setState(() => {
             return { secondTeamOvers: text }
         })
     }
 
     setStateCalculateScore = (value) => {
-        console.log(this.calculateScore())
         this.setState(() => {
             return { calculatedScore: this.calculateScore() }
         })
