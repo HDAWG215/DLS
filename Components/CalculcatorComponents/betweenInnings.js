@@ -3,7 +3,7 @@ import { View, Button, Text } from 'react-native';
 import CalculationInput from './../CalculationInput';
 import ResourceTable from './../../ResourceTables/ResourceTable.js';
 
-export default class BetweenInnings extends Component {
+export default class FirstInnings extends Component {
     constructor(props) {
         super(props);
         this.state = {
