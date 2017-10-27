@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Button, Text } from 'react-native';
 import styles from './StyleSheet';
-import CalculationInput from './CalculationInput'
+import BetweenInnings from './CalulcatorComponents/betweenInnings';
 
 export default class CalculationPage extends Component {
     constructor(props) {
@@ -10,11 +10,12 @@ export default class CalculationPage extends Component {
 
     render() {        
         return (
-            <View style={ styles.contrainer }>
+            <View style={ styles.container }>
                 <Button title="Back" onPress={ this.props.resetPickerValue }/>
                 <Text style={styles.instructions}>You are on {this.props.pickerValue}</Text>
-                <CalculationInput textChange={this.props.textChange}/>
-                <Text>{this.props.text}</Text>
+                { this.props.pickerValue == 'betweenInningsInterruption' ? 
+                    <BetweenInnings textChange={this.props.textChange}/> : null
+                }
             </View>
         )
     }

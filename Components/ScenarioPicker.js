@@ -19,7 +19,8 @@ export default class ScenarioPicker extends Component {
                             selectedValue={ this.props.pickerValue }
                             onValueChange={(value) => {this.props.valueChange(value)}}>
                             <Picker.Item label='First Team Interrupted' value='firstInterruption'/>
-                            <Picker.Item label='Second Team Interrupted' value='secondInterruption'/>
+                            <Picker.Item label='Second Team Interrupted' value='secondInterruption'/>                            
+                            <Picker.Item label='Between Innings Interruption' value='betweenInningsInterruption'/>                            
                             <Picker.Item label='Both Teams Interrupted' value='bothInterruption'/>
                             <Picker.Item label='Multiple Interruptions' value='multiInterruption'/>
                         </Picker> :
