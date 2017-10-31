@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { ScrollView, Button, Text } from 'react-native';
+import { 
+    ScrollView, 
+    Button, 
+    Text 
+} from 'react-native';
 import CalculationInput from './../CalculationInput';
 import ResourceTable from './../../ResourceTables/ResourceTable.js';
 
@@ -8,7 +12,7 @@ export default class BetweenInnings extends Component {
         super(props);
         this.state = {
             lengthOfGame: null,
-            timeAtInterruption: null,
+            oversPlayedAtInterruption: null,
             totalAtInterruption: null,
             wicketsAtInterruption: null,
             firstTeamTotal: null,        
@@ -17,41 +21,41 @@ export default class BetweenInnings extends Component {
         }
     }
 
-    gameLength = (text) => {
+    gameLength = (text) => {        
         this.setState(() => {
             return { lengthOfGame: text }
         })
     }
     
     
-    firstTeamTotal = (text) => {        
+    firstTeamTotal = (text) => {              
         this.setState(() => {
             return { firstTeamTotal: text }
         })
     }
     
-    oversPlayedAtInterruption = (text) => {           
+    oversPlayedAtInterruption = (text) => {               
         this.setState(() => {
             return { oversPlayedAtInterruption: text }
         })
     }
    
    
-    oversPerSideAfterInterruption = (text) => {          
+    oversPerSideAfterInterruption = (text) => {              
         this.setState(() => {
             return { oversPerSideAfterInterruption: text }
         })
     }
     
     
-    totalAtInterruption = (text) => {
+    totalAtInterruption = (text) => {        
         this.setState(() => {
             return { totalAtInterruption: text }
         })
     }
     
     
-    wicketsAtInterruption = (text) => {                
+    wicketsAtInterruption = (text) => {    
         this.setState(() => {
             return { wicketsAtInterruption: text }
         })
@@ -95,7 +99,13 @@ export default class BetweenInnings extends Component {
                 <CalculationInput textChange={this.firstTeamTotal}/>   
                 <Text>Overs Per Side After Interruption</Text>
                 <CalculationInput textChange={this.oversPerSideAfterInterruption}/>   
-                <Button onPress={this.setStateCalculateScore} title="Calculate Score"></Button>
+                { this.state.lengthOfGame &&
+                    this.state.firstTeamTotal &&
+                    this.state.oversPerSideAfterInterruption &&
+                    this.state.oversPlayedAtInterruption &&
+                    this.state.totalAtInterruption &&
+                    this.state.wicketsAtInterruption
+                    ? <Button onPress={this.setStateCalculateScore} title="Calculate Score"></Button> : null }
                 { this.state.calculatedScore ? <Text>Second Teams Target: {this.state.calculatedScore}</Text> : null }
             </ScrollView>
         )

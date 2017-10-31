@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { View, Button, Text } from 'react-native';
+import { 
+    View, 
+    Button, 
+    Text    
+} from 'react-native';
 import CalculationInput from './../CalculationInput';
 import ResourceTable from './../../ResourceTables/ResourceTable.js';
 
@@ -52,7 +56,7 @@ export default class FirstInnings extends Component {
     }
 
     render() {
-        return (
+        return (         
             <View>
                 <Text>Length of Game (Overs)</Text>        
                 <CalculationInput textChange={this.gameLength}/>
@@ -62,7 +66,7 @@ export default class FirstInnings extends Component {
                 <CalculationInput textChange={this.secondTeamOvers}/>   
                 <Button onPress={this.setStateCalculateScore} title="Calculate Score"></Button>
                 { this.state.calculatedScore ? <Text>Second Teams Target: {this.state.calculatedScore}</Text> : null }
-            </View>
+            </View>            
         )
     }
 }

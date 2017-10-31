@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+    TouchableWithoutFeedback,
     Platform,
     Text,
     View,
@@ -47,19 +48,21 @@ export default class App extends Component {
 
     render() {
         return ( 
-            <View style={styles.container}>     
-                { !this.state.pickerValue ? <WelcomePage 
-                    setActivePickerState={ this.setActivePickerState }
-                    valueChange={ this.valueChange }
-                    pickerValue={ this.state.pickerValue }
-                    {...this.state}
-                /> : 
-                <CalculationPage 
-                    resetPickerValue={ this.resetPickerValue }
-                    textChange={ this.textChange }
-                    {...this.state}
-                /> }    
-            </View>
+            <TouchableWithoutFeedback>
+                <View style={styles.container}>     
+                    { !this.state.pickerValue ? <WelcomePage 
+                        setActivePickerState={ this.setActivePickerState }
+                        valueChange={ this.valueChange }
+                        pickerValue={ this.state.pickerValue }
+                        {...this.state}
+                    /> : 
+                    <CalculationPage 
+                        resetPickerValue={ this.resetPickerValue }
+                        textChange={ this.textChange }
+                        {...this.state}
+                    /> }    
+                </View>
+            </TouchableWithoutFeedback>
         );
     }
 }
