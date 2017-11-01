@@ -3,6 +3,7 @@ import { View, Button, Text } from 'react-native';
 import styles from './StyleSheet';
 import BetweenInnings from './CalculcatorComponents/betweenInnings';
 import FirstInnings from './CalculcatorComponents/firstInnings';
+import SecondInnings from './CalculcatorComponents/secondInnings';
 
 export default class CalculationPage extends Component {
     constructor(props) {
@@ -19,6 +20,9 @@ export default class CalculationPage extends Component {
                 }
                 { this.props.pickerValue == 'firstInningsInterruption' ? 
                     <FirstInnings textChange={this.props.textChange}/> : null
+                }
+                { this.props.pickerValue == 'secondInningsInterruption' ? 
+                    <SecondInnings textChange={this.props.textChange}/> : null
                 }
             </View>
         )
