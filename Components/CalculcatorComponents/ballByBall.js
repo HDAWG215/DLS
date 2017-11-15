@@ -3,21 +3,25 @@ import {
     View, 
     Button, 
     Text,
-    ScrollView 
+    ScrollView,
+    TouchableWithoutFeedback,
+    TouchableHighlight
 } from 'react-native';
 import CalculationInput from './../CalculationInput';
 import ResourceTable from './../../ResourceTables/ResourceTable.js';
 import AddOvers from './../../OverOperators/addition';
 import SubtractOvers from './../../OverOperators/subtraction';
+import HorinzontalScoreScrollView from './../HorizontalScrollScore';
 
-export default class FirstInnings extends Component {
+export default class BallByBall extends Component {
     constructor(props) {
         super(props);
         this.state = {
             lengthOfGame: 50,
             firstTeamOversLost: 0,
             firstTeamTotal: null,            
-            calculatedScore: null
+            calculatedScore: null,
+            horizontal: true
         }
     }
 
@@ -74,13 +78,9 @@ export default class FirstInnings extends Component {
     calculateScore = () => {
         let revisedTotal;
         const G50 = 245;
-        // const lengthOfGame = this.state.lengthOfGame;        
         const firstTeamResources = ResourceTable[this.state.lengthOfGame][0];        
         const firstTeamTotal = this.state.firstTeamTotal;        
         const secondTeamOversLost = SubtractOvers(this.state.lengthOfGame, this.state.secondTeamOversGone);
-        // console.log(this.state.lengthOfGame);
-        // console.log(this.state.secondTeamOversGone);
-        // console.log(secondTeamOversLost);
         const secondTeamResourceLost = ResourceTable[secondTeamOversLost][this.state.secondTeamCurrentWicketsLost];
         const secondTeamResourcesUsed = firstTeamResources - secondTeamResourceLost;
         if ( firstTeamResources > secondTeamResourcesUsed ) {
@@ -100,8 +100,6 @@ export default class FirstInnings extends Component {
             <ScrollView>
                 <Text>1st Team Overs Completed</Text>        
                 <CalculationInput textChange={this.gameLength}/>
-                {/* <Text>1st Team Overs Lost Mid Innings (if any)</Text>
-                <CalculationInput textChange={this.firstTeamOversLost}/>             */}
                 <Text>1st Team Total</Text>
                 <CalculationInput textChange={this.firstTeamTotal}/>
                 <Text>2nd Team Overs Gone</Text>
@@ -111,8 +109,19 @@ export default class FirstInnings extends Component {
                 <Text>2nd Team Current Wickets Lost</Text>
                 <CalculationInput textChange={this.secondTeamCurrentWicketsLost}/>                  
                 <Button onPress={this.setStateCalculateScore} title="Calculate Score"></Button>
+                <TouchableWithoutFeedback>
+                    <ScrollView horizontal={this.state.horizontal}>
+                        <Text style={styles.welcome}>Banter</Text>
+                        <Text style={styles.welcome}>Banter</Text>
+                        <Text style={styles.welcome}>Banter</Text>
+                        <Text style={styles.welcome}>Banter</Text>
+                        <Text style={styles.welcome}>Banter</Text>
+                        <Text style={styles.welcome}>Banter</Text>
+                        <Text style={styles.welcome}>Banter</Text>
+                    </ScrollView>
+                </TouchableWithoutFeedback>
                 { this.state.calculatedScore ? <Text>At This Stage The Second Team Requires: {this.state.calculatedScore}</Text> : null }
-            </ScrollView>            
+            </ScrollView>                 
         )
     }
 }
