@@ -11,6 +11,7 @@ import CalculationInput from './../CalculationInput';
 import ResourceTable from './../../ResourceTables/ResourceTable.js';
 import AddOvers from './../../OverOperators/addition';
 import SubtractOvers from './../../OverOperators/subtraction';
+import OversPlusBalls from './../../OverOperators/oversPlusBalls';
 import HorinzontalScoreScrollView from './../HorizontalScrollScore';
 
 export default class BallByBall extends Component {
@@ -75,12 +76,36 @@ export default class BallByBall extends Component {
         })
     }
 
-    calculateScore = () => {
+    mapOversToElements = (array) => {
+        return array.map((ballsGone) => {
+            const oversGoneAtStage = OversPlusBalls(this.state.secondTeamOversGone, ballsGone);            
+            return ( 
+                <View>
+                    <Text> {oversGoneAtStage}: {this.calculateScore(oversGoneAtStage)}||</Text>
+                </View> );
+        })
+    }
+
+    remainingArrayScore = () => {
+        let elementArray = [];
+        const totalElements = SubtractOvers(this.state.lengthOfGame, this.state.secondTeamOversGone).totalBalls;
+
+        for (let a = 0; a < totalElements; a++) {
+            elementArray.push(a);
+        }
+        
+        this.setState(() => {
+            return { scoreArray : this.mapOversToElements(elementArray) }
+        })
+    }
+
+    calculateScore = (ballsAfterPoint) => {        
         let revisedTotal;
         const G50 = 245;
         const firstTeamResources = ResourceTable[this.state.lengthOfGame][0];        
         const firstTeamTotal = this.state.firstTeamTotal;        
-        const secondTeamOversLost = SubtractOvers(this.state.lengthOfGame, this.state.secondTeamOversGone);
+        const secondTeamOversLost = SubtractOvers(this.state.lengthOfGame, ballsAfterPoint).overs;
+        console.log(secondTeamOversLost);
         const secondTeamResourceLost = ResourceTable[secondTeamOversLost][this.state.secondTeamCurrentWicketsLost];
         const secondTeamResourcesUsed = firstTeamResources - secondTeamResourceLost;
         if ( firstTeamResources > secondTeamResourcesUsed ) {
@@ -108,19 +133,11 @@ export default class BallByBall extends Component {
                 <CalculationInput textChange={this.secondTeamCurrentScore}/>   
                 <Text>2nd Team Current Wickets Lost</Text>
                 <CalculationInput textChange={this.secondTeamCurrentWicketsLost}/>                  
-                <Button onPress={this.setStateCalculateScore} title="Calculate Score"></Button>
-                <TouchableWithoutFeedback>
-                    <ScrollView horizontal={this.state.horizontal}>
-                        <Text style={styles.welcome}>Banter</Text>
-                        <Text style={styles.welcome}>Banter</Text>
-                        <Text style={styles.welcome}>Banter</Text>
-                        <Text style={styles.welcome}>Banter</Text>
-                        <Text style={styles.welcome}>Banter</Text>
-                        <Text style={styles.welcome}>Banter</Text>
-                        <Text style={styles.welcome}>Banter</Text>
-                    </ScrollView>
-                </TouchableWithoutFeedback>
-                { this.state.calculatedScore ? <Text>At This Stage The Second Team Requires: {this.state.calculatedScore}</Text> : null }
+                <Button onPress={this.remainingArrayScore} title="Calculate Score"></Button>
+                { this.state.scoreArray ? <TouchableWithoutFeedback>
+                    <HorinzontalScoreScrollView children={this.state.scoreArray}/>
+                </TouchableWithoutFeedback> : null }
+                {/* { this.state.calculatedScore ? <Text>At This Stage The Second Team Requires: {this.state.calculatedScore}</Text> : null } */}
             </ScrollView>                 
         )
     }

@@ -12,5 +12,8 @@ export default SubtractOvers = (xOvers, yOvers) => {
     const intOvers = Math.floor((subtraction)/6);
     const decOvers = (subtraction % 6) / 10;
 
-    return intOvers + decOvers;
+    return {
+        overs: intOvers + decOvers,
+        totalBalls: subtraction 
+    };
 }

@@ -8,15 +8,10 @@ export default class HorinzontalScoreScrollView extends Component {
     }
 
     render() {
+        console.log(this.props.children);
         return (
             <ScrollView horizontal={true}>
-                <Text style={styles.welcome}>Banter</Text>
-                <Text style={styles.welcome}>Banter</Text>
-                <Text style={styles.welcome}>Banter</Text>
-                <Text style={styles.welcome}>Banter</Text>
-                <Text style={styles.welcome}>Banter</Text>
-                <Text style={styles.welcome}>Banter</Text>
-                <Text style={styles.welcome}>Banter</Text>
+                {this.props.children}
             </ScrollView>
         )
     }
