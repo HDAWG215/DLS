@@ -1,4 +1,4 @@
-export default SubtractOvers = (xOvers, yOvers) => {
+const SubtractOvers = (xOvers, yOvers) => {
     const xInt = Math.floor(xOvers);
     const yInt = Math.floor(yOvers);
     const xDec = Math.round((xOvers - xInt) * 10);
@@ -17,3 +17,5 @@ export default SubtractOvers = (xOvers, yOvers) => {
         totalBalls: subtraction 
     };
 }
+
+export default SubtractOvers;

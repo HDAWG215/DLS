@@ -1,4 +1,4 @@
-export default AddOvers = (xOvers, yOvers) => {
+const AddOvers = (xOvers, yOvers) => {
     const xInt = Math.floor(xOvers);
     const yInt = Math.floor(yOvers);
     const xDec = Math.round((xOvers - xInt) * 10);
@@ -14,3 +14,5 @@ export default AddOvers = (xOvers, yOvers) => {
 
     return xInt + yInt + decTotal;
 }
+
+export default AddOvers;
