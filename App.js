@@ -48,21 +48,21 @@ export default class App extends Component {
 
     render() {
         return ( 
-            <TouchableWithoutFeedback>
-                <View style={styles.container}>     
-                    { !this.state.pickerValue ? <WelcomePage 
-                        setActivePickerState={ this.setActivePickerState }
-                        valueChange={ this.valueChange }
-                        pickerValue={ this.state.pickerValue }
-                        {...this.state}
-                    /> : 
-                    <CalculationPage 
+            <View style={styles.container}>     
+                { !this.state.pickerValue ? <WelcomePage 
+                    setActivePickerState={ this.setActivePickerState }
+                    valueChange={ this.valueChange }
+                    pickerValue={ this.state.pickerValue }
+                    {...this.state}
+                /> : 
+                <TouchableWithoutFeedback>
+                        <CalculationPage 
                         resetPickerValue={ this.resetPickerValue }
                         textChange={ this.textChange }
                         {...this.state}
-                    /> }    
-                </View>
-            </TouchableWithoutFeedback>
+                    />
+                </TouchableWithoutFeedback> }    
+            </View>            
         );
     }
 }
