@@ -7,8 +7,7 @@ export default class HorinzontalScoreScrollView extends Component {
         super(props)
     }
 
-    render() {
-        console.log(this.props.children);
+    render() {        
         return (
             <ScrollView horizontal={true}>
                 {this.props.children}

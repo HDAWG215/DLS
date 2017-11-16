@@ -80,8 +80,8 @@ export default class BallByBall extends Component {
         return array.map((ballsGone) => {
             const oversGoneAtStage = OversPlusBalls(this.state.secondTeamOversGone, ballsGone);            
             return ( 
-                <View>
-                    <Text> {oversGoneAtStage}: {this.calculateScore(oversGoneAtStage)}||</Text>
+                <View key={ballsGone}>
+                    <Text key={ballsGone}> {oversGoneAtStage}: {this.calculateScore(oversGoneAtStage)}||</Text>
                 </View> );
         })
     }
@@ -105,7 +105,6 @@ export default class BallByBall extends Component {
         const firstTeamResources = ResourceTable[this.state.lengthOfGame][0];        
         const firstTeamTotal = this.state.firstTeamTotal;        
         const secondTeamOversLost = SubtractOvers(this.state.lengthOfGame, ballsAfterPoint).overs;
-        console.log(secondTeamOversLost);
         const secondTeamResourceLost = ResourceTable[secondTeamOversLost][this.state.secondTeamCurrentWicketsLost];
         const secondTeamResourcesUsed = firstTeamResources - secondTeamResourceLost;
         if ( firstTeamResources > secondTeamResourcesUsed ) {
