@@ -1,4 +1,4 @@
-export default OversPlusBalls = (xOvers, balls) => {
+const OversPlusBalls = (xOvers, balls) => {
     const xInt = Math.floor(xOvers); 
     const xDec = Math.round((xOvers - xInt) * 10); 
 
@@ -11,3 +11,5 @@ export default OversPlusBalls = (xOvers, balls) => {
 
     return intOvers + decOvers;
 }
+
+export default OversPlusBalls;
