@@ -113,8 +113,7 @@ export default class BallByBall extends Component {
                 <Button onPress={this.remainingArrayScore} title="Calculate Score"></Button>
                 { this.state.scoreArray ? <TouchableWithoutFeedback>
                     <HorinzontalScoreScrollView children={this.state.scoreArray}/>
-                </TouchableWithoutFeedback> : null }
-                {/* { this.state.calculatedScore ? <Text>At This Stage The Second Team Requires: {this.state.calculatedScore}</Text> : null } */}
+                </TouchableWithoutFeedback> : null }                
             </ScrollView>                 
         )
     }

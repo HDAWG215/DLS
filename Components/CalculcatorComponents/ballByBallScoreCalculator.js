@@ -1,11 +1,11 @@
 import SubtractOvers from './../../OverOperators/subtraction';
 import ResourceTable from './../../ResourceTables/ResourceTable';
 
-const calculateScore = (lengthOfGame, firstTeamTotal, secondTeamCurrentWicketsLost, ballsAfterPoint) => {        
+const calculateScore = (lengthOfGame, firstTeamTotal, secondTeamCurrentWicketsLost, oversGoneAtStage) => {        
     let revisedTotal;
     const G50 = 245;
     const firstTeamResources = ResourceTable[lengthOfGame][0];        
-    const secondTeamOversLost = SubtractOvers(lengthOfGame, ballsAfterPoint).overs;
+    const secondTeamOversLost = SubtractOvers(lengthOfGame, oversGoneAtStage).overs;
     const secondTeamResourceLost = ResourceTable[secondTeamOversLost][secondTeamCurrentWicketsLost];
     const secondTeamResourcesUsed = firstTeamResources - secondTeamResourceLost;
     if ( firstTeamResources > secondTeamResourcesUsed ) {
