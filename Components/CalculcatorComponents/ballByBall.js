@@ -8,11 +8,11 @@ import {
     TouchableHighlight
 } from 'react-native';
 import CalculationInput from './../CalculationInput';
-import ResourceTable from './../../ResourceTables/ResourceTable.js';
 import AddOvers from './../../OverOperators/addition';
 import SubtractOvers from './../../OverOperators/subtraction';
 import OversPlusBalls from './../../OverOperators/oversPlusBalls';
 import HorinzontalScoreScrollView from './../HorizontalScrollScore';
+import calculateScore from './ballByBallScoreCalculator';
 
 export default class BallByBall extends Component {
     constructor(props) {
@@ -70,18 +70,16 @@ export default class BallByBall extends Component {
         })
     }
 
-    setStateCalculateScore = (value) => {
-        this.setState(() => {
-            return { calculatedScore: this.calculateScore() }
-        })
-    }
-
     mapOversToElements = (array) => {
         return array.map((ballsGone) => {
             const oversGoneAtStage = OversPlusBalls(this.state.secondTeamOversGone, ballsGone);            
             return ( 
                 <View key={ballsGone}>
-                    <Text key={ballsGone}> {oversGoneAtStage}: {this.calculateScore(oversGoneAtStage)}||</Text>
+                    <Text key={ballsGone}> {oversGoneAtStage}: {calculateScore(
+                        this.state.lengthOfGame,
+                        this.state.firstTeamTotal, 
+                        this.state.secondTeamCurrentWicketsLost,
+                        oversGoneAtStage)}||</Text>
                 </View> );
         })
     }
@@ -97,26 +95,6 @@ export default class BallByBall extends Component {
         this.setState(() => {
             return { scoreArray : this.mapOversToElements(elementArray) }
         })
-    }
-
-    calculateScore = (ballsAfterPoint) => {        
-        let revisedTotal;
-        const G50 = 245;
-        const firstTeamResources = ResourceTable[this.state.lengthOfGame][0];        
-        const firstTeamTotal = this.state.firstTeamTotal;        
-        const secondTeamOversLost = SubtractOvers(this.state.lengthOfGame, ballsAfterPoint).overs;
-        const secondTeamResourceLost = ResourceTable[secondTeamOversLost][this.state.secondTeamCurrentWicketsLost];
-        const secondTeamResourcesUsed = firstTeamResources - secondTeamResourceLost;
-        if ( firstTeamResources > secondTeamResourcesUsed ) {
-            revisedTotal = Math.floor((firstTeamTotal * (secondTeamResourcesUsed/firstTeamResources)) + 1)
-        } else if ( secondTeamResourcesUsed < firstTeamResources ) {
-            revisedTotal = Math.floor((firstTeamTotal + ((secondTeamResourcesUsed - firstTeamResources) * G50)/100)+ 1)
-        } else if ( firstTeamResources == secondTeamResourcesUsed ) {
-            revisedTotal = Math.floor(firstTeamTotal + 1)
-        } else {
-            revisedTotal = 'Error, please try again'
-        }
-        return revisedTotal;
     }
 
     render() {
@@ -135,8 +113,7 @@ export default class BallByBall extends Component {
                 <Button onPress={this.remainingArrayScore} title="Calculate Score"></Button>
                 { this.state.scoreArray ? <TouchableWithoutFeedback>
                     <HorinzontalScoreScrollView children={this.state.scoreArray}/>
-                </TouchableWithoutFeedback> : null }
-                {/* { this.state.calculatedScore ? <Text>At This Stage The Second Team Requires: {this.state.calculatedScore}</Text> : null } */}
+                </TouchableWithoutFeedback> : null }                
             </ScrollView>                 
         )
     }

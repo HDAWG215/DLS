@@ -7,12 +7,12 @@ const AddOvers = (xOvers, yOvers) => {
     const totalXBalls = (xInt * 6) + xDec;
     const totalYBalls = (yInt * 6) + yDec;
 
-    const addition = totalXBall + totalYBalls;
+    const addition = totalXBalls + totalYBalls;
 
     const intOvers = Math.floor(addition/6);
     const decOvers = (addition % 6) / 10;
 
-    return xInt + yInt + decTotal;
+    return intOvers + decOvers;
 }
 
 export default AddOvers;
