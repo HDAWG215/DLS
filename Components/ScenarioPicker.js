@@ -15,7 +15,7 @@ export default class ScenarioPicker extends Component {
                     onPress={ this.props.setActivePickerState }/>
                     { this.props.activePicker ?
                         <Picker              
-                            style={styles.common.picker}
+                            style={styles.picker}
                             selectedValue={ this.props.pickerValue }
                             onValueChange={(value) => {this.props.valueChange(value)}}>                        
                             <Picker.Item label='First Team Interrupted' value='firstInningsInterruption'/>

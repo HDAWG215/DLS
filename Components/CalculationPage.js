@@ -13,9 +13,9 @@ export default class CalculationPage extends Component {
 
     render() {        
         return (
-            <View style={ styles.common.container }>
+            <View style={ styles.container }>
                 <Button title="Back" onPress={ this.props.resetPickerValue }/>
-                <Text style={styles.common.instructions}>You are on {this.props.pickerValue}</Text>
+                <Text style={styles.instructions}>You are on {this.props.pickerValue}</Text>
                 { this.props.pickerValue == 'betweenInningsInterruption' ? 
                     <BetweenInnings textChange={this.props.textChange}/> : null
                 }

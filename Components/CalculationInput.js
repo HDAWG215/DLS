@@ -10,7 +10,7 @@ export default class CalculationInput extends Component {
     render() {
         return (
             <TextInput
-                style={styles.common.textBox}
+                style={styles.textBox}
                 onChangeText={this.props.textChange}
                 value={this.props.text}
             />

@@ -48,7 +48,7 @@ export default class App extends Component {
 
     render() {
         return ( 
-            <View style={styles.common.container}>     
+            <View style={styles.container}>     
                 { !this.state.pickerValue ? <WelcomePage 
                     setActivePickerState={ this.setActivePickerState }
                     valueChange={ this.valueChange }
