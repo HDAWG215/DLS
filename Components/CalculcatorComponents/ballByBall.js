@@ -12,7 +12,8 @@ import AddOvers from './../../OverOperators/addition';
 import SubtractOvers from './../../OverOperators/subtraction';
 import OversPlusBalls from './../../OverOperators/oversPlusBalls';
 import HorinzontalScoreScrollView from './../HorizontalScrollScore';
-import calculateScore from './ballByBallScoreCalculator';
+import CalculateScore from './ballByBallScoreCalculator';
+import styles from './../StyleSheet';
 
 export default class BallByBall extends Component {
     constructor(props) {
@@ -20,7 +21,9 @@ export default class BallByBall extends Component {
         this.state = {
             lengthOfGame: 50,
             firstTeamOversLost: 0,
-            firstTeamTotal: null,            
+            firstTeamTotal: 240,     
+            secondTeamOversGone: 22.2,
+            secondTeamCurrentWicketsLost: 4,          
             calculatedScore: null,
             horizontal: true
         }
@@ -72,14 +75,16 @@ export default class BallByBall extends Component {
 
     mapOversToElements = (array) => {
         return array.map((ballsGone) => {
-            const oversGoneAtStage = OversPlusBalls(this.state.secondTeamOversGone, ballsGone);            
+            const oversGoneAtStage = OversPlusBalls(this.state.secondTeamOversGone, ballsGone); 
+            const parScoreAtStage = CalculateScore(
+                this.state.lengthOfGame,
+                this.state.firstTeamTotal, 
+                this.state.secondTeamCurrentWicketsLost,
+                oversGoneAtStage)           
             return ( 
-                <View key={ballsGone}>
-                    <Text key={ballsGone}> {oversGoneAtStage}: {calculateScore(
-                        this.state.lengthOfGame,
-                        this.state.firstTeamTotal, 
-                        this.state.secondTeamCurrentWicketsLost,
-                        oversGoneAtStage)}||</Text>
+                <View style={styles.ballByBall.scoreArrayParent} key={ballsGone}>
+                    <Text style={styles.ballByBall.scoreArrayChildHeader} key={ballsGone}> {oversGoneAtStage}</Text>
+                    <Text style={styles.ballByBall.scoreArrayChildScore} key={ballsGone + ".0"}> {parScoreAtStage}</Text>
                 </View> );
         })
     }
@@ -100,20 +105,24 @@ export default class BallByBall extends Component {
     render() {
         return (
             <ScrollView>
-                <Text>1st Team Overs Completed</Text>        
-                <CalculationInput textChange={this.gameLength}/>
-                <Text>1st Team Total</Text>
-                <CalculationInput textChange={this.firstTeamTotal}/>
-                <Text>2nd Team Overs Gone</Text>
-                <CalculationInput textChange={this.secondTeamOversGone}/>   
-                <Text>2nd Team Current Score</Text>
-                <CalculationInput textChange={this.secondTeamCurrentScore}/>   
-                <Text>2nd Team Current Wickets Lost</Text>
-                <CalculationInput textChange={this.secondTeamCurrentWicketsLost}/>                  
+                <View style={styles.ballByBall.page}>
+                    <View style={styles.ballByBall.flexColumn}>
+                        <Text style={styles.ballByBall.flexColumnHeader}>1st Team</Text>
+                        <Text style={styles.common.textInputHeading}>Overs Done</Text>
+                        <CalculationInput textChange={this.gameLength}/>
+                        <Text style={styles.common.textInputHeading}>Total</Text>
+                        <CalculationInput textChange={this.firstTeamTotal}/>
+                    </View>
+                    <View style={styles.ballByBall.flexColumn}>
+                        <Text style={styles.ballByBall.flexColumnHeader}>2nd Team</Text>
+                        <Text style={styles.common.textInputHeading}>Overs Gone</Text>
+                        <CalculationInput textChange={this.secondTeamOversGone}/>                
+                        <Text style={styles.common.textInputHeading}>Wickets Lost</Text>
+                        <CalculationInput textChange={this.secondTeamCurrentWicketsLost}/>    
+                    </View>
+                </View>                 
                 <Button onPress={this.remainingArrayScore} title="Calculate Score"></Button>
-                { this.state.scoreArray ? <TouchableWithoutFeedback>
-                    <HorinzontalScoreScrollView children={this.state.scoreArray}/>
-                </TouchableWithoutFeedback> : null }                
+                { this.state.scoreArray ? <HorinzontalScoreScrollView children={this.state.scoreArray}/> : null }
             </ScrollView>                 
         )
     }

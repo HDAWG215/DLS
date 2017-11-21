@@ -9,7 +9,7 @@ export default class HorinzontalScoreScrollView extends Component {
 
     render() {        
         return (
-            <ScrollView horizontal={true}>
+            <ScrollView style={styles.ballByBall.horizontalScrollView} horizontal={true}>
                 {this.props.children}
             </ScrollView>
         )
