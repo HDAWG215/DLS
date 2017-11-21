@@ -37,4 +37,9 @@ describe('Calculating Score', () => {
         const calculatedScore = CalculateScore(50, 240, 7, 0);
         chai.expect(calculatedScore).to.equal(188);
     });
+    
+    it('Can calculate correct score', () => {
+        const calculatedScore = CalculateScore(45, 450, 2, 20.1);
+        chai.expect(calculatedScore).to.equal(164);
+    });
 });
