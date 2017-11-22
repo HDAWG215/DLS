@@ -12,10 +12,6 @@ import styles from './Components/StyleSheet';
 import WelcomePage from './Components/WelcomePage';
 import CalculationPage from './Components/CalculationPage';
 
-fetchState = () => {
-    const state = getState();
-}
-
 export default class App extends Component {  
     constructor(props) {
         super(props);

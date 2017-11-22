@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export default styles = {
+const styles = {
     common: StyleSheet.create({
         container: {
             flex: 1,
@@ -53,8 +53,11 @@ export default styles = {
             flexGrow: 0,
             flexDirection: 'row',
             alignSelf: 'center',
-            paddingRight: 30,
-            paddingLeft: 30        
+            marginLeft: 60,
+            marginRight: 60,
+            borderColor: '#000000',
+            borderWidth: 3,
+            borderRadius: 20   
         },
         flexColumnHeader: {            
             fontWeight: "600",
@@ -63,25 +66,29 @@ export default styles = {
             paddingBottom: 15,
             alignSelf: 'center'      
         },
-        flexColumn: {            
-            borderColor: "#000000",
-            borderWidth: 1,
-            width: '50%'
+        flexColumn1: {                             
+            width: '50%',
+            borderColor: '#000000',
+            borderRightWidth: 3            
+        },
+        flexColumn2: {                             
+            width: '50%',
+            borderColor: '#000000',
+            borderLeftWidth: 3
         },
         horizontalScrollView: {
             flex: 1,
             flexDirection: 'row',
             flexGrow: 0,
             alignSelf: 'center',
-            height: 70,
-            borderColor: '#000000',
-            borderWidth: 1,
+            height: 70,            
+            marginLeft: 25 
         },
         scoreArrayParent: {
             flex: 1, 
             flexDirection: 'column',
-            borderRightColor: '#000000',            
-            borderRightWidth: 1,
+            borderColor: '#000000',            
+            borderWidth: 1,
             width: 70,
             height: 70,
             alignItems: 'center'
@@ -100,3 +107,5 @@ export default styles = {
         }
     })
 }; 
+
+export default styles;
