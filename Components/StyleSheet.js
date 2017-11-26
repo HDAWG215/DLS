@@ -44,7 +44,12 @@ const styles = {
             paddingLeft: 24,
             paddingRight: 24,
             paddingTop: 15,
-            alignSelf: 'center' 
+            alignSelf: 'center',
+            textAlign: 'center'
+        },
+        interruption: {
+            borderTopWidth: 3,
+            borderTopColor: '#000000'
         }
     }),
     ballByBall: StyleSheet.create({
@@ -57,7 +62,7 @@ const styles = {
             marginRight: 60,
             borderColor: '#000000',
             borderWidth: 3,
-            borderRadius: 20   
+            borderRadius: 20
         },
         flexColumnHeader: {            
             fontWeight: "600",

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import styles from './StyleSheet';
 
 export default class CalculationInput extends Component {
@@ -9,11 +9,15 @@ export default class CalculationInput extends Component {
 
     render() {
         return (
-            <TextInput
-                style={styles.common.textBox}
-                onChangeText={this.props.textChange}
-                value={this.props.text}
-            />
+            <View>
+                <Text style={styles.common.textInputHeading}>{this.props.title}</Text>
+                <TextInput
+                    keyboardType='numeric'
+                    style={styles.common.textBox}
+                    onChangeText={this.props.textChange}
+                    value={this.props.text}
+                />
+            </View>
         )
     }
 }
