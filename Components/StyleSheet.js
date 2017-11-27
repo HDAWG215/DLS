@@ -7,8 +7,7 @@ const styles = {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: '#F5FCFF',
-            paddingTop: 50,
-            height: 500
+            paddingTop: 20 
         },
         welcome: {
             fontSize: 40,
@@ -58,8 +57,8 @@ const styles = {
             flexGrow: 0,
             flexDirection: 'row',
             alignSelf: 'center',
-            marginLeft: 60,
-            marginRight: 60,
+            marginLeft: 30,
+            marginRight: 30,
             borderColor: '#000000',
             borderWidth: 3,
             borderRadius: 20

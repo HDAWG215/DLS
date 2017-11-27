@@ -23,12 +23,10 @@ const calculateScore = (
         const secondTeamResourcesUsed = secondTeamResourcesAvailable - 
             ResourceTable[SubtractOvers(sTInningsLength, oversGoneAtStage).overs][secondTeamCurrentWicketsLost] 
 
-        if ( firstTeamResourceUsed > secondTeamResourcesAvailable ) {
+        if ( firstTeamResourceUsed >= secondTeamResourcesAvailable ) {
             revisedTotal = Math.floor((firstTeamTotal * (secondTeamResourcesUsed/firstTeamResourceUsed)))
         } else if ( firstTeamResourceUsed < secondTeamResourcesAvailable ) {
-            revisedTotal = Math.floor((170 + ((secondTeamResourcesUsed - firstTeamResourceUsed) * G50)/100))
-        } else if ( firstTeamResourceUsed == secondTeamResourcesAvailable ) {
-            revisedTotal = Math.floor(firstTeamTotal)
+            revisedTotal = Math.floor((firstTeamTotal + ((secondTeamResourcesUsed - firstTeamResourceUsed) * G50)/100))
         } else {
             revisedTotal = 'Error, please try again'
         }
