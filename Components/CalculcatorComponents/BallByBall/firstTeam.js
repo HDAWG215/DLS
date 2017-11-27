@@ -11,6 +11,7 @@ import {
 import styles from './../../StyleSheet';
 import CalculationInput from './../../CalculationInput';
 import InterruptionComponent from './../../InterruptionComponent';
+import ReusableButton from './../../ReusableButton';
 
 export default class FirstTeam extends Component {
     constructor(props) {
@@ -29,7 +30,11 @@ export default class FirstTeam extends Component {
                             <Text style={styles.ballByBall.flexColumnHeader}>1st Team</Text>                        
                             <CalculationInput title={'Game Length Before Play'} textChange={this.props.gameLength}/>
                             <CalculationInput title={'Total'} textChange={this.props.firstTeamTotal}/>
-                            <Button title='Add Interruption' onPress={this.props.fTToggleInterruption}/> 
+                            <ReusableButton 
+                                buttonStyle={styles.buttons.generalButton}
+                                textStyle={styles.buttons.generalButtonText} 
+                                title='Add Interruption' 
+                                onPress={this.props.fTToggleInterruption}/> 
                         </View> : null }
                     { this.props.fTInterruptionActive ? 
                         <InterruptionComponent 

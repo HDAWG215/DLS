@@ -7,7 +7,6 @@ import {
     TextInput,
     Modal
 } from 'react-native';
-import StyledButton from './Components/Button';
 import styles from './Components/StyleSheet';
 import WelcomePage from './Components/WelcomePage';
 import CalculationPage from './Components/CalculationPage';

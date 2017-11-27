@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Button } from 'react-native';
 
 const styles = {
     common: StyleSheet.create({
@@ -46,7 +46,19 @@ const styles = {
             paddingTop: 15,
             alignSelf: 'center',
             textAlign: 'center'
-        }       
+        }     
+    }),
+    buttons: StyleSheet.create({
+        generalButton: {
+            padding: 15,
+            alignSelf: 'center'
+        },
+        generalButtonText: {
+            fontWeight: "500",
+            fontSize: 15,
+            alignSelf: 'center',
+            color: '#007aff'
+        }
     }),
     ballByBall: StyleSheet.create({
         page: {
