@@ -4,6 +4,7 @@ import {
     Button, 
     Text,
     ScrollView,
+    KeyboardAvoidingView,
     TouchableWithoutFeedback,
     TouchableHighlight
 } from 'react-native';
@@ -22,40 +23,35 @@ export default class BallByBall extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lengthOfGame: 45,
-            firstTeamTotal: 212,      
-            secondTeamOversGone: 0.1,
-            secondTeamCurrentWicketsLost: 0,
-            firstTeamInterruptions: [{
-                wickets: 0,
-                overs: 0,
-                lengthAfter: 45
-            }],
-            secondTeamInterruptions: [{
-                    wickets: 0,
-                    overs: 0,
-                    lengthAfter: 35
-                }
-            ]
+            lengthOfGame: 50,
+            firstTeamTotal: undefined,      
+            secondTeamOversGone: undefined,
+            secondTeamCurrentWicketsLost: undefined,
+            firstTeamInterruptions: [],
+            secondTeamInterruptions: []
         }
     }
 
     gameLength = (text) => {
-        this.setState(() => {
-            return { lengthOfGame: parseInt(text) }
-        })
+        const gameLength = parseInt(text);
+        if ( 20 <= gameLength && gameLength < 50 ) {
+            const pushedArray = this.state.firstTeamInterruptions;
+            pushedArray.push({
+                wickets: 0,
+                overs: 0,
+                lengthAfter: gameLength
+            });
+            this.setState(() => {
+                return {
+                    firstTeamInterruptions: this.state.firstTeamInterruptions
+                }
+            });
+        } 
     }
     
     firstTeamTotal = (text) => {             
         this.setState(() => {
             return { firstTeamTotal: parseInt(text) }                
-        })
-    }
-    
-    firstTeamOversLost = (text) => { 
-        const overs = parseFloat(text); 
-        this.setState(() => {
-            return { firstTeamOversLost: SubtractOvers(this.state.lengthOfGame, overs).overs }
         })
     }
     
@@ -99,7 +95,8 @@ export default class BallByBall extends Component {
                 secondTeamInterruptionResourceLost,
                 remainingGameLength[1],
                 this.state.secondTeamCurrentWicketsLost,
-                oversGoneAtStage)           
+                oversGoneAtStage);
+
             return ( 
                 <View style={styles.ballByBall.scoreArrayParent} key={ballsGone}>
                     <Text style={styles.ballByBall.scoreArrayChildHeader} key={ballsGone}> {oversGoneAtStage}</Text>
@@ -125,52 +122,10 @@ export default class BallByBall extends Component {
     }
 
     fTToggleInterruption = () => {
-        if (this.state.fTInterruptionActive) {
-            if (this.state.fTWicketsAtInt && this.state.fTOversAtInt && this.state.fTLengthAfterInt) {
-                const pushedArray = this.state.firstTeamInterruptions;
-                pushedArray.push({
-                    wickets: this.state.fTWicketsAtInt,
-                    overs: this.state.fTOversAtInt,
-                    lengthAfter: this.state.fTLengthAfterInt
-                })
-                this.setState(() => {
-                    return {
-                        firstTeamInterruptions: this.state.firstTeamInterruptions
-                    }
-                });            
-            }
-        }
-        this.setState(() => {
-            return { fTInterruptionActive: !this.state.fTInterruptionActive }
-        })
-    }
-    
-    sTToggleInterruption = () => {
-        if (this.state.sTInterruptionActive) {
-            if ((this.state.sTWicketsAtInt || this.state.sTWicketsAtInt == 0) && 
-                (this.state.sTOversAtInt || this.state.sTOversAtInt == 0) && 
-                (this.state.sTLengthAfterInt || this.state.sTLengthAfterInt == 0)) {
-                    const pushedArray = this.state.secondTeamInterruptions;
-                    pushedArray.push({
-                        wickets: this.state.sTWicketsAtInt,
-                        overs: this.state.sTOversAtInt,
-                        lengthAfter: this.state.sTLengthAfterInt
-                    })
-                    this.setState(() => {
-                        return {
-                            secondTeamInterruptions: this.state.secondTeamInterruptions
-                        }
-                    }
-                );            
-            }
-        }
-        this.setState(() => {
-            return { sTInterruptionActive: !this.state.sTInterruptionActive }
-        })
-    }
-    
-    fTToggleInterruption = () => {
-        if (this.state.fTInterruptionActive) {
+        const allValuesNotInput = this.state.fTWicketsAtInt == undefined && 
+            this.state.fTOversAtInt == undefined &&
+            this.state.fTLengthAfterInt == undefined;
+        if (this.state.fTInterruptionActive && !allValuesNotInput) { 
             if ((this.state.fTWicketsAtInt || this.state.fTWicketsAtInt == 0) && 
                 (this.state.fTOversAtInt || this.state.fTOversAtInt == 0) && 
                 (this.state.fTLengthAfterInt || this.state.fTLengthAfterInt == 0)) {
@@ -189,7 +144,44 @@ export default class BallByBall extends Component {
             }
         }
         this.setState(() => {
-            return { fTInterruptionActive: !this.state.fTInterruptionActive }
+            return { 
+                fTInterruptionActive: !this.state.fTInterruptionActive,
+                fTWicketsAtInt: undefined,
+                fTOversAtInt: undefined,
+                fTLengthAfterInt: undefined 
+            }
+        })
+    }
+    
+    sTToggleInterruption = () => {
+        const allValuesNotInput = this.state.sTLengthAfterInt == undefined;
+        const interruptionAcitve = this.state.sTInterruptionActive;
+        console.log(this.state.secondTeamInterruptions);
+        if (interruptionAcitve && !allValuesNotInput) {
+            if ((this.state.sTWicketsAtInt || this.state.sTWicketsAtInt == undefined) && 
+                (this.state.sTOversAtInt || this.state.sTOversAtInt == undefined) && 
+                (this.state.sTLengthAfterInt || this.state.sTLengthAfterInt == undefined)) {
+                    const pushedArray = this.state.secondTeamInterruptions;
+                    pushedArray.push({
+                        wickets: this.state.sTWicketsAtInt ? this.state.sTWicketsAtInt : 0,
+                        overs: this.state.sTOversAtInt ? this.state.sTOversAtInt : 0,
+                        lengthAfter: this.state.sTLengthAfterInt
+                    })
+                    this.setState(() => {
+                        return {
+                            secondTeamInterruptions: this.state.secondTeamInterruptions
+                        }
+                    }
+                );            
+            }
+        }
+        this.setState(() => {
+            return { 
+                sTInterruptionActive: !this.state.sTInterruptionActive,
+                sTWicketsAtInt: undefined,
+                sTOversAtInt: undefined,
+                sTLengthAfterInt: undefined
+            }
         })
     }
 
@@ -231,52 +223,54 @@ export default class BallByBall extends Component {
 
     render() {
         return (
-            <ScrollView>
-                <View style={styles.ballByBall.page}>
-                    <View style={styles.ballByBall.flexColumn1}>
-                        <Text style={styles.ballByBall.flexColumnHeader}>1st Team</Text>                        
-                        <CalculationInput title={'Game Length Before Play'} textChange={this.firstTeamOversLost}/>
-                        <CalculationInput title={'Total'} textChange={this.firstTeamTotal}/>
-                        { this.state.firstTeamInterruptions.length > 0 ? 
-                            <Text style={styles.common.textInputHeading}>Interruptions Added: {this.state.firstTeamInterruptions.length}</Text> : null }
-                        { !this.state.fTInterruptionActive ? 
-                            <Button 
-                                title='Add Interruption' 
-                                onPress={this.fTToggleInterruption}/> 
-                                : null }
-                        { this.state.fTInterruptionActive ? 
-                            <InterruptionComponent 
-                                wicketsAtInt={this.fTWicketsAtInt}
-                                oversAtInt={this.fTOversAtInt}
-                                lengthAfterInt={this.fTLengthAfterInt}
-                                toggleInterruption={this.fTToggleInterruption}/>
-                                : null }
-                    </View>
-                    <View style={styles.ballByBall.flexColumn2}>
-                        <Text style={styles.ballByBall.flexColumnHeader}>2nd Team</Text>
-                        <CalculationInput title={'Overs Gone'} textChange={this.secondTeamOversGone}/>                        
-                        <CalculationInput title={'Wickets Lost'} textChange={this.secondTeamCurrentWicketsLost}/>
-                        { this.state.secondTeamInterruptions.length > 0 ? 
-                            <Text style={styles.common.textInputHeading}>
-                                Interruptions Added: {this.state.secondTeamInterruptions.length}
-                            </Text> : null }
-                        { !this.state.sTInterruptionActive ? 
-                            <Button 
-                                title='Add Interruption' 
-                                onPress={this.sTToggleInterruption}/> 
-                                : null }
-                        { this.state.sTInterruptionActive ? 
-                            <InterruptionComponent 
-                                wicketsAtInt={this.sTWicketsAtInt}
-                                oversAtInt={this.sTOversAtInt}
-                                lengthAfterInt={this.sTLengthAfterInt}
-                                toggleInterruption={this.sTToggleInterruption}/>
-                                : null }
-                    </View>
-                </View>                 
-                <Button onPress={this.remainingArrayScore} title="Calculate Score"></Button>
-                { this.state.scoreArray ? <HorinzontalScoreScrollView children={this.state.scoreArray}/> : null }
-            </ScrollView>                 
+            <KeyboardAvoidingView behavior='position'>
+                <ScrollView>
+                    <View style={styles.ballByBall.page}>
+                        <View style={styles.ballByBall.flexColumn1}>
+                            <Text style={styles.ballByBall.flexColumnHeader}>1st Team</Text>                        
+                            <CalculationInput title={'Game Length'} textChange={this.gameLength}/>
+                            <CalculationInput title={'Total'} textChange={this.firstTeamTotal}/>
+                            { this.state.firstTeamInterruptions.length > 0 ? 
+                                <Text style={styles.common.textInputHeading}>Interruptions Added: {this.state.firstTeamInterruptions.length}</Text> : null }
+                            { !this.state.fTInterruptionActive ? 
+                                <Button 
+                                    title='Add Interruption' 
+                                    onPress={this.fTToggleInterruption}/> 
+                                    : null }
+                            { this.state.fTInterruptionActive ? 
+                                <InterruptionComponent 
+                                    wicketsAtInt={this.fTWicketsAtInt}
+                                    oversAtInt={this.fTOversAtInt}
+                                    lengthAfterInt={this.fTLengthAfterInt}
+                                    toggleInterruption={this.fTToggleInterruption}/>
+                                    : null }
+                        </View>
+                        <View style={styles.ballByBall.flexColumn2}>
+                            <Text style={styles.ballByBall.flexColumnHeader}>2nd Team</Text>
+                            <CalculationInput title={'Overs Gone'} textChange={this.secondTeamOversGone}/>                        
+                            <CalculationInput title={'Wickets Lost'} textChange={this.secondTeamCurrentWicketsLost}/>
+                            { this.state.secondTeamInterruptions.length > 0 ? 
+                                <Text style={styles.common.textInputHeading}>
+                                    Interruptions Added: {this.state.secondTeamInterruptions.length}
+                                </Text> : null }
+                            { !this.state.sTInterruptionActive ? 
+                                <Button 
+                                    title='Add Interruption' 
+                                    onPress={this.sTToggleInterruption}/> 
+                                    : null }
+                            { this.state.sTInterruptionActive ? 
+                                <InterruptionComponent                                
+                                    wicketsAtInt={this.sTWicketsAtInt}
+                                    oversAtInt={this.sTOversAtInt}
+                                    lengthAfterInt={this.sTLengthAfterInt}
+                                    toggleInterruption={this.sTToggleInterruption}/>
+                                    : null }
+                        </View>
+                    </View>                 
+                    <Button onPress={this.remainingArrayScore} title="Calculate Score"></Button>
+                    { this.state.scoreArray ? <HorinzontalScoreScrollView children={this.state.scoreArray}/> : null }
+                </ScrollView>
+            </KeyboardAvoidingView>
         )
     }
 }

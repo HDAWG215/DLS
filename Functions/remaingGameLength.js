@@ -2,8 +2,7 @@ const RemainingGameLength = (firstTeamInterruptions, secondTeamInterruptions) =>
     let firstTeamInningsLength = 50;
     let secondTeamInningsLength = 50;
     let secondTeamLostBeforeStart = 0;
-    let previousOvers = 50;
-    // console.log(secondTeamInterruptions);
+    let previousOvers = 50; 
     firstTeamInterruptions.forEach(element => { 
         firstTeamInningsLength = element.lengthAfter;
     });

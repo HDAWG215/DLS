@@ -13,6 +13,7 @@ export default class CalculationInput extends Component {
                 <Text style={styles.common.textInputHeading}>{this.props.title}</Text>
                 <TextInput
                     keyboardType='numeric'
+                    returnKeyType='done'
                     style={styles.common.textBox}
                     onChangeText={this.props.textChange}
                     value={this.props.text}
