@@ -1,6 +1,6 @@
-import SubtractOvers from './../../Functions/OverOperators/subtraction';
-import ResourceTable from './../../ResourceTables/ResourceTable';
-import ResourceLost from './../../Functions/ResourceCalculations/resourceLost';
+import SubtractOvers from './../../../Functions/OverOperators/subtraction';
+import ResourceTable from './../../../ResourceTables/ResourceTable';
+import ResourceLost from './../../../Functions/ResourceCalculations/resourceLost';
 
 const calculateScore = (
     lengthOfGame, 

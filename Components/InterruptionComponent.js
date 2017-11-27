@@ -18,7 +18,7 @@ export default class InterruptionComponent extends Component {
 
     render() {
         return (
-            <View style={styles.common.interruption}> 
+            <View> 
                 <CalulcationInput textChange={this.props.wicketsAtInt} title='Wickets At Interruption'/>
                 <CalulcationInput textChange={this.props.oversAtInt} title='Overs At Interruption'/>
                 <CalulcationInput textChange={this.props.lengthAfterInt} title='Game Length After Interruption'/>

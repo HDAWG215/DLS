@@ -4,7 +4,7 @@ import styles from './StyleSheet';
 
 export default class HorinzontalScoreScrollView extends Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
     render() {        

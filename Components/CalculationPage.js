@@ -4,7 +4,7 @@ import styles from './StyleSheet';
 import BetweenInnings from './CalculcatorComponents/betweenInnings';
 import FirstInnings from './CalculcatorComponents/firstInnings';
 import SecondInnings from './CalculcatorComponents/secondInnings';
-import BallByBall from './CalculcatorComponents/ballByBall';
+import BallByBall from './CalculcatorComponents/BallByBall/ballByBall';
 
 export default class CalculationPage extends Component {
     constructor(props) {
@@ -13,9 +13,7 @@ export default class CalculationPage extends Component {
 
     render() {        
         return (
-            <View style={ styles.common.container }>
-                <Button title="Back" onPress={ this.props.resetPickerValue }/>
-                <Text style={styles.common.instructions}>You are on {this.props.pickerValue}</Text>
+            <View>
                 { this.props.pickerValue == 'betweenInningsInterruption' ? 
                     <BetweenInnings textChange={this.props.textChange}/> : null
                 }
@@ -26,7 +24,7 @@ export default class CalculationPage extends Component {
                     <SecondInnings textChange={this.props.textChange}/> : null
                 }
                 { this.props.pickerValue == 'ballByBall' ? 
-                    <BallByBall textChange={this.props.textChange}/> : null
+                    <BallByBall resetPickerValue={this.props.resetPickerValue} textChange={this.props.textChange}/> : null
                 }
             </View>
         )
