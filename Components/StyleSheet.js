@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const styles = {
     common: StyleSheet.create({
@@ -7,7 +7,8 @@ const styles = {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: '#F5FCFF',
-            paddingTop: 20 
+            paddingTop: 20,
+            paddingBottom: 50
         },
         welcome: {
             fontSize: 40,
@@ -31,7 +32,7 @@ const styles = {
             padding: 10
         },
         picker: {
-            width: 1000
+            width: Dimensions.get('window').width
         },
         textThing: {
             fontSize: 24,      
@@ -45,23 +46,14 @@ const styles = {
             paddingTop: 15,
             alignSelf: 'center',
             textAlign: 'center'
-        },
-        interruption: {
-            borderTopWidth: 3,
-            borderTopColor: '#000000'
-        }
+        }       
     }),
     ballByBall: StyleSheet.create({
         page: {
-            flex: 1,
-            flexGrow: 0,
-            flexDirection: 'row',
+            flex: -1,
             alignSelf: 'center',
             marginLeft: 30,
-            marginRight: 30,
-            borderColor: '#000000',
-            borderWidth: 3,
-            borderRadius: 20
+            marginRight: 30
         },
         flexColumnHeader: {            
             fontWeight: "600",
@@ -70,23 +62,23 @@ const styles = {
             paddingBottom: 15,
             alignSelf: 'center'      
         },
-        flexColumn1: {                             
-            width: '50%',
+        team1View: {
             borderColor: '#000000',
-            borderRightWidth: 3            
+            borderWidth: 3,
+            borderRadius: 20,
+            width: Dimensions.get('window').width - 60
         },
-        flexColumn2: {                             
-            width: '50%',
+        team2View: {
             borderColor: '#000000',
-            borderLeftWidth: 3
+            borderWidth: 3,
+            borderRadius: 20,
+            width: Dimensions.get('window').width - 60
         },
         horizontalScrollView: {
-            flex: 1,
-            flexDirection: 'row',
-            flexGrow: 0,
             alignSelf: 'center',
             height: 70,            
-            marginLeft: 25 
+            marginLeft: 25,
+            paddingTop: 40
         },
         scoreArrayParent: {
             flex: 1, 
