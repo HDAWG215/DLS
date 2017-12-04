@@ -2,36 +2,26 @@ import SubtractOvers from './../../../Functions/OverOperators/subtraction';
 import ResourceTable from './../../../ResourceTables/ResourceTable';
 import ResourceLost from './../../../Functions/ResourceCalculations/resourceLost';
 
-const calculateScore = (
-    lengthOfGame, 
-    fTLostByInterruption,
-    firstTeamTotal, 
-    sTLostByInterruption,
-    sTInningsLength,
-    sTLengthAfterInts,
-    secondTeamCurrentWicketsLost,
-    oversGoneAtStage) => {        
-               
-        let revisedTotal;
-        const G50 = 245;
-        
-        const firstTeamResourceLost = fTLostByInterruption;
+const calculateScore = (data) => {        
 
-        const firstTeamResourceUsed = ResourceTable[lengthOfGame][0] - firstTeamResourceLost;
-        
-        const secondTeamResourcesAvailable = ResourceTable[sTInningsLength][0] - sTLostByInterruption
+    let revisedTotal;
+    const G50 = 245;
 
-        const secondTeamResourcesUsed = secondTeamResourcesAvailable - 
-            ResourceTable[SubtractOvers(sTLengthAfterInts, oversGoneAtStage).overs][secondTeamCurrentWicketsLost] 
+    const firstTeamResourceUsed = ResourceTable[data.lengthOfGame][0] - data.fTLostByInterruption;
+    
+    const secondTeamResourcesAvailable = ResourceTable[data.sTInningsLength][0] - data.sTLostByInterruption
 
-        if ( firstTeamResourceUsed >= secondTeamResourcesAvailable ) {
-            revisedTotal = Math.floor((firstTeamTotal * (secondTeamResourcesUsed/firstTeamResourceUsed)))
-        } else if ( firstTeamResourceUsed < secondTeamResourcesAvailable ) {
-            revisedTotal = Math.floor((firstTeamTotal + ((secondTeamResourcesUsed - firstTeamResourceUsed) * G50)/100))
-        } else {
-            revisedTotal = 'Error, please try again'
-        }
-        return revisedTotal;
+    const secondTeamResourcesUsed = secondTeamResourcesAvailable - 
+        ResourceTable[SubtractOvers(data.sTLengthAfterInts, data.oversGoneAtStage).overs][data.secondTeamCurrentWicketsLost];
+
+    if ( firstTeamResourceUsed >= secondTeamResourcesAvailable ) {
+        revisedTotal = Math.floor((data.firstTeamTotal * (secondTeamResourcesUsed/firstTeamResourceUsed)))
+    } else if ( firstTeamResourceUsed < secondTeamResourcesAvailable ) {
+        revisedTotal = Math.floor((data.firstTeamTotal + ((secondTeamResourcesUsed - firstTeamResourceUsed) * G50)/100))
+    } else {
+        revisedTotal = 'Error, please try again'
+    }
+    return revisedTotal;
 }
 
 export default calculateScore;
