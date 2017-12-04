@@ -85,19 +85,23 @@ export default class BallByBall extends Component {
             const secondTeamInterruptionResourceLost = ResourceLost(
                 remainingGameLength[1], 
                 this.state.secondTeamInterruptions);
-            
+
             const parScoreAtStage = CalculateScore(
                 {
-                    lengthOfGame: remainingGameLength[0],   
+                    lengthOfGame: this.state.lengthOfGame,   
                     fTLostByInterruption: firstTeamInterruptionsResourceLost,
                     firstTeamTotal: this.state.firstTeamTotal,
                     sTLostByInterruption: secondTeamInterruptionResourceLost,
-                    sTInningsLength: remainingGameLength[1],
-                    sTLengthAfterInts: remainingGameLength[2],
+                    sTInningsLength: remainingGameLength[0],
+                    sTLengthAfterInts: remainingGameLength[1],
                     secondTeamCurrentWicketsLost: this.state.secondTeamCurrentWicketsLost,
                     oversGoneAtStage: oversGoneAtStage
                 }
             );
+
+            if (parScoreAtStage < 0) {
+                return null
+            };
 
             return ( 
                 <View style={styles.ballByBall.scoreArrayParent} key={ballsGone}>
@@ -115,7 +119,7 @@ export default class BallByBall extends Component {
         const totalElements = SubtractOvers(remainingGameLength[1], this.state.secondTeamOversGone).totalBalls;
 
         for (let a = 0; a < totalElements; a++) {
-            elementArray.push(a);
+            elementArray.push(a + 1);
         }
 
         this.setState(() => {

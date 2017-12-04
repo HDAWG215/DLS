@@ -16,8 +16,9 @@ const RemainingGameLength = (firstTeamInterruptions, secondTeamInterruptions) =>
         });
     } else {
         secondTeamInningsLength = firstTeamInningsLength;
+        stLengthAfterInt = secondTeamInningsLength;
     }
-    return [firstTeamInningsLength, secondTeamInningsLength, stLengthAfterInt];
+    return [secondTeamInningsLength, stLengthAfterInt];
 }
 
 export default RemainingGameLength;
