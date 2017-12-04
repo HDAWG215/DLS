@@ -17,7 +17,7 @@ const ResourceLost = (inningsLength, interruptionsArray) => {
     
             lostResource += resourceLost;          
         }       
-        previousGameLength = element.lengthAfter; 
+        previousGameLength = element.lengthAfter;
     });
     return lostResource;
 }

@@ -8,6 +8,7 @@ const calculateScore = (
     firstTeamTotal, 
     sTLostByInterruption,
     sTInningsLength,
+    sTLengthAfterInts,
     secondTeamCurrentWicketsLost,
     oversGoneAtStage) => {        
                
@@ -18,10 +19,10 @@ const calculateScore = (
 
         const firstTeamResourceUsed = ResourceTable[lengthOfGame][0] - firstTeamResourceLost;
         
-        const secondTeamResourcesAvailable = ResourceTable[sTInningsLength][0] - sTLostByInterruption;  
+        const secondTeamResourcesAvailable = ResourceTable[sTInningsLength][0] - sTLostByInterruption
 
         const secondTeamResourcesUsed = secondTeamResourcesAvailable - 
-            ResourceTable[SubtractOvers(sTInningsLength, oversGoneAtStage).overs][secondTeamCurrentWicketsLost] 
+            ResourceTable[SubtractOvers(sTLengthAfterInts, oversGoneAtStage).overs][secondTeamCurrentWicketsLost] 
 
         if ( firstTeamResourceUsed >= secondTeamResourcesAvailable ) {
             revisedTotal = Math.floor((firstTeamTotal * (secondTeamResourcesUsed/firstTeamResourceUsed)))

@@ -1,5 +1,5 @@
 import chai from 'chai';
-import AddOvers from './../../OverOperators/addition';
+import AddOvers from './../../Functions/OverOperators/addition';
 
 describe('Add Overs', () => {
    

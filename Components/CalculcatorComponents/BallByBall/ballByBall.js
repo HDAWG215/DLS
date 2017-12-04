@@ -92,6 +92,7 @@ export default class BallByBall extends Component {
                 this.state.firstTeamTotal,
                 secondTeamInterruptionResourceLost,
                 remainingGameLength[1],
+                remainingGameLength[2],
                 this.state.secondTeamCurrentWicketsLost,
                 oversGoneAtStage);
 

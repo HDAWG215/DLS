@@ -1,5 +1,5 @@
 import chai from 'chai';
-import OversPlusBalls from './../../OverOperators/oversPlusBalls';
+import OversPlusBalls from './../../Functions/OverOperators/oversPlusBalls';
 
 describe('Overs Plus Balls', () => {
    

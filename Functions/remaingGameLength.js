@@ -6,16 +6,18 @@ const RemainingGameLength = (firstTeamInterruptions, secondTeamInterruptions) =>
     firstTeamInterruptions.forEach(element => { 
         firstTeamInningsLength = element.lengthAfter;
     });
-    if (secondTeamInterruptions.length = 0) {
+    if (secondTeamInterruptions.length != 0) {
         secondTeamInterruptions.forEach(element => {      
             if (element.overs == 0) {
                 secondTeamInningsLength = element.lengthAfter;
+            } else {
+                stLengthAfterInt = element.lengthAfter;
             }
         });
     } else {
         secondTeamInningsLength = firstTeamInningsLength;
     }
-    return [firstTeamInningsLength, secondTeamInningsLength];
+    return [firstTeamInningsLength, secondTeamInningsLength, stLengthAfterInt];
 }
 
 export default RemainingGameLength;
