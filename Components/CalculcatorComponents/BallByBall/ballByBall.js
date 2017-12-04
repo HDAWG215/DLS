@@ -252,7 +252,6 @@ export default class BallByBall extends Component {
                         flipPages={this.flipPages}
                         remainingArrayScore={this.remainingArrayScore}
                         scoreArray={this.state.scoreArray}
-                        banter={this.banter}
                     /> }
                 </View>
             </KeyboardAvoidingView>

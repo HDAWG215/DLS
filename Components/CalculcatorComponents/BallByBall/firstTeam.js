@@ -21,7 +21,11 @@ export default class FirstTeam extends Component {
     render() {
         return ( 
             <View style={ styles.common.container }>
-                <Button title="Back" onPress={ this.props.resetPickerValue }/>
+                <ReusableButton 
+                    buttonStyle={styles.buttons.generalButton}
+                    textStyle={styles.buttons.generalButtonText} 
+                    title='Back' 
+                    onPress={this.props.resetPickerValue}/>
                 <View style={styles.ballByBall.team1View}>
                     { this.props.firstTeamInterruptions.length > 0 ? 
                         <Text style={styles.common.textInputHeading}>Interruptions Added: {this.props.firstTeamInterruptions.length}</Text> : null }
@@ -34,7 +38,7 @@ export default class FirstTeam extends Component {
                                 buttonStyle={styles.buttons.generalButton}
                                 textStyle={styles.buttons.generalButtonText} 
                                 title='Add Interruption' 
-                                onPress={this.props.fTToggleInterruption}/> 
+                                onPress={this.props.fTToggleInterruption}/>
                         </View> : null }
                     { this.props.fTInterruptionActive ? 
                         <InterruptionComponent 
@@ -44,7 +48,11 @@ export default class FirstTeam extends Component {
                             toggleInterruption={this.props.fTToggleInterruption}/>
                             : null }
                 </View>
-                <Button title='Second Team' onPress={this.props.flipPages}/>
+                <ReusableButton 
+                    buttonStyle={styles.buttons.generalButton}
+                    textStyle={styles.buttons.generalButtonText} 
+                    title='Second Team' 
+                    onPress={this.props.flipPages}/>
             </View>
         )
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Picker, Button, Modal } from 'react-native';
 import styles from './StyleSheet';
+import ReusableButton from './ReusableButton';
 
 export default class ScenarioPicker extends Component {  
     constructor(props) {
@@ -9,10 +10,11 @@ export default class ScenarioPicker extends Component {
     render() {      
         return (
             <View>
-                <Button
-                    color='blue'            
-                    title='Choose Scenario'
-                    onPress={ this.props.setActivePickerState }/>
+                <ReusableButton 
+                    buttonStyle={styles.buttons.generalButton}
+                    textStyle={styles.buttons.generalButtonText} 
+                    title='Choose Scenario' 
+                    onPress={this.props.setActivePickerState}/>
                     { this.props.activePicker ?
                         <Picker              
                             style={styles.common.picker}
