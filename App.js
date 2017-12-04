@@ -44,14 +44,15 @@ export default class App extends Component {
     render() {
         return ( 
             <View style={styles.common.container}>     
-                { !this.state.pickerValue ? <WelcomePage 
+                { !this.state.pickerValue ? 
+                <WelcomePage 
                     setActivePickerState={ this.setActivePickerState }
                     valueChange={ this.valueChange }
                     pickerValue={ this.state.pickerValue }
                     {...this.state}
                 /> : 
                 <TouchableWithoutFeedback>
-                        <CalculationPage 
+                    <CalculationPage 
                         resetPickerValue={ this.resetPickerValue }
                         textChange={ this.textChange }
                         {...this.state}

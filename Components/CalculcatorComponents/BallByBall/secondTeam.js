@@ -12,6 +12,7 @@ import styles from './../../StyleSheet';
 import CalculationInput from './../../CalculationInput';
 import InterruptionComponent from './../../InterruptionComponent';
 import HorinzontalScoreScrollView from './../../HorizontalScrollScore';
+import ReusableButton from './../../ReusableButton';
 
 export default class SecondTeam extends Component {
     constructor(props) {
@@ -21,7 +22,11 @@ export default class SecondTeam extends Component {
     render() {
         return ( 
             <View style={styles.common.container}>
-                <Button title='Back' onPress={this.props.flipPages}/>
+                 <ReusableButton 
+                    buttonStyle={styles.buttons.generalButton}
+                    textStyle={styles.buttons.generalButtonText} 
+                    title='Back' 
+                    onPress={this.props.flipPages}/>
                 <View style={styles.ballByBall.team2View}>                   
                     { this.props.secondTeamInterruptions.length > 0 ? 
                         <Text style={styles.common.textInputHeading}>
@@ -32,7 +37,11 @@ export default class SecondTeam extends Component {
                             <Text style={styles.ballByBall.flexColumnHeader}>2nd Team</Text>
                             <CalculationInput title={'Overs Gone'} textChange={this.props.secondTeamOversGone}/>                        
                             <CalculationInput title={'Wickets Lost'} textChange={this.props.secondTeamCurrentWicketsLost}/>
-                            <Button title='Add Interruption' onPress={this.props.sTToggleInterruption}/> 
+                            <ReusableButton 
+                                buttonStyle={styles.buttons.generalButton}
+                                textStyle={styles.buttons.generalButtonText} 
+                                title='Add Interruption' 
+                                onPress={this.props.sTToggleInterruption}/>
                         </View>
                             : null }
                     { this.props.sTInterruptionActive ? 
@@ -43,7 +52,11 @@ export default class SecondTeam extends Component {
                             toggleInterruption={this.props.sTToggleInterruption}/>
                             : null }
                 </View>
-                <Button onPress={this.props.remainingArrayScore} title="Calculate Score"></Button>
+                <ReusableButton 
+                    buttonStyle={styles.buttons.generalButton}
+                    textStyle={styles.buttons.generalButtonText} 
+                    title='Calculate Score' 
+                    onPress={this.props.remainingArrayScore}/>
                 { this.props.scoreArray ? <HorinzontalScoreScrollView children={this.props.scoreArray}/> : null }
             </View>
         )
