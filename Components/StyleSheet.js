@@ -46,6 +46,12 @@ const styles = {
             paddingTop: 15,
             alignSelf: 'center',
             textAlign: 'center'
+        },
+        errorText: {
+            fontWeight: "600",
+            fontSize: 15,
+            alignSelf: 'center',
+            color: 'red'
         }     
     }),
     buttons: StyleSheet.create({

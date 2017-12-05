@@ -26,6 +26,9 @@ export default class FirstTeam extends Component {
                     textStyle={styles.buttons.generalButtonText} 
                     title='Back' 
                     onPress={this.props.resetPickerValue}/>
+                { this.props.activeGameLengthError ? 
+                    <Text style={styles.common.errorText}>Game cannot be longer than 50 overs</Text>
+                    : null }
                 <View style={styles.ballByBall.team1View}>
                     { this.props.firstTeamInterruptions.length > 0 ? 
                         <Text style={styles.common.textInputHeading}>Interruptions Added: {this.props.firstTeamInterruptions.length}</Text> : null }

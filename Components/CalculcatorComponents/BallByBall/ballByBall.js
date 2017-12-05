@@ -37,6 +37,15 @@ export default class BallByBall extends Component {
 
     gameLength = (text) => {
         const gameLength = parseInt(text);
+        if ( gameLength > 50) {
+            this.setState(() => {
+                return { activeGameLengthError: true }
+            });
+        } else {
+            this.setState(() => {
+                return { activeGameLengthError: false }
+            })
+        }
         if ( 20 <= gameLength && gameLength < 50 ) {
             const pushedArray = this.state.firstTeamInterruptions;
             pushedArray.push({
@@ -75,10 +84,7 @@ export default class BallByBall extends Component {
         return array.map((ballsGone) => {
             const oversGoneAtStage = OversPlusBalls(this.state.secondTeamOversGone, ballsGone);    
 
-            const remainingGameLength = RemainingGameLength(
-                this.state.firstTeamInterruptions, 
-                this.state.secondTeamInterruptions
-            ); 
+            const remainingGameLength = RemainingGameLength(this.state.secondTeamInterruptions); 
 
             const firstTeamInterruptionsResourceLost = ResourceLost(50, this.state.firstTeamInterruptions);  
 
@@ -112,9 +118,7 @@ export default class BallByBall extends Component {
     }
 
     remainingArrayScore = () => {
-        const remainingGameLength = RemainingGameLength(
-            this.state.firstTeamInterruptions, 
-            this.state.secondTeamInterruptions);
+        const remainingGameLength = RemainingGameLength(this.state.secondTeamInterruptions);
         let elementArray = [];      
         const totalElements = SubtractOvers(remainingGameLength[1], this.state.secondTeamOversGone).totalBalls;
 
@@ -238,6 +242,7 @@ export default class BallByBall extends Component {
                 <View style={styles.ballByBall.page}>
                     { this.state.firstPage ? <FirstTeam
                         gameLength={this.gameLength}
+                        activeGameLengthError={this.state.activeGameLengthError}
                         firstTeamTotal={this.firstTeamTotal}
                         firstTeamInterruptions={this.state.firstTeamInterruptions}
                         fTInterruptionActive={this.state.fTInterruptionActive}
